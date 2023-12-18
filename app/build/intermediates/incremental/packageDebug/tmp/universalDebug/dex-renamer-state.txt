@@ -1,0 +1,4 @@
+#Mon Dec 18 13:01:05 CET 2023
+base.0=/home/mich/Scrivania/ubt_alphamini_app_demo-master/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+path.0=classes.dex

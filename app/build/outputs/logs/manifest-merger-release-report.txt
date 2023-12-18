@@ -1,0 +1,434 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:2:1-11:12
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:2:1-34:12
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:2:1-14:12
+MERGED from [com.android.support:support-fragment:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/7a45fc9bb0d437e59371c51df318ea6b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/97f259f2e22fbb9a8e12470b9d3570aa/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/b812a5ce2358267fa492fdd55656ba0c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/292cd3c2bf59fa49cac1ccdca7af0c64/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3732b6650bb7d175927825695589c56a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/d6d07588f7d4ff6a9d61d688ac8b866f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/347923c0d93e497a3bd3fb2435ed5f90/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/ce93ea2d5b0cb10ca158e69ed0a27613/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/5c81b10bbd743d952aae60a54b694cbc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3689d87a0d0bcae3383b606f44723f64/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/f68dcab8ba63e61f4ba99f05b7adff22/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/60d4912f847f124e4241b6194c4e19b4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/189ceb1cbde6f1ec4d670a8f027616f1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/605b602b73073ff0941fe2000a5b1d07/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/34e280d4bda44356d130195a10db3300/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/18ff43277086e888a4920444f3ac07fd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/bb6af336654d7584a6e8020dc68831bc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/1f466dfd8da41e9b869b889db41fc5c2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/a1577b37d8e41fdbccd6a2c4099c1983/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/a84d07ba89fef7f4faa86b502dee8a31/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/80951b9ec0f4c6a9552252d6c7c374fd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/c079bfe20e46de89a17943e005ddffcb/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/265045bb53ca1094323e01f20dd32927/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/20435770c27e9902ef5ce025abdbaf5d/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+	package
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:4:5-40
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:1-136:12
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#com.ubtrobot.master.permission.MASTER
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:6:3-74
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:11:5-77
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:11:5-77
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:6:20-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:11:3-78
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:20:5-81
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:20:5-81
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:11:20-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:12:3-77
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:24:5-80
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:24:5-80
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:12:20-75
+uses-permission#android.permission.INTERNET
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:13:3-65
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:13:5-67
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:13:20-62
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:14:3-77
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:19:5-79
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:19:5-79
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:14:20-74
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:15:3-77
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:16:5-79
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:16:5-79
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:15:20-74
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:17:3-68
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:22:5-71
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:22:5-71
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:17:20-66
+application
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:19:3-134:17
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/605b602b73073ff0941fe2000a5b1d07/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/605b602b73073ff0941fe2000a5b1d07/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:25:7-33
+	android:label
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:23:7-39
+	android:roundIcon
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:24:7-52
+	android:icon
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:22:7-41
+	android:allowBackup
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:21:7-33
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:26:7-38
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:20:7-30
+activity#com.ubtrobot.mini.sdkdemo.MainActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:29:5-36:16
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:29:15-43
+intent-filter#action:name:android.intent.action.MAIN+action:name:android.intent.action.VIEW+category:name:android.intent.category.LAUNCHER
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:30:7-35:23
+action#android.intent.action.MAIN
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:31:9-60
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:31:17-58
+action#android.intent.action.VIEW
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:32:9-60
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:32:17-58
+category#android.intent.category.LAUNCHER
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:34:9-68
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:34:19-66
+activity#com.ubtrobot.mini.sdkdemo.ActionApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:37:5-39:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:39:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:38:9-42
+activity#com.ubtrobot.mini.sdkdemo.ExpressApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:40:5-42:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:42:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:41:9-43
+activity#com.ubtrobot.mini.sdkdemo.SpeechApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:43:5-45:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:45:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:44:9-42
+activity#com.ubtrobot.mini.sdkdemo.MotorApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:46:5-48:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:48:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:47:9-41
+activity#com.ubtrobot.mini.sdkdemo.FaceApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:49:5-51:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:51:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:50:9-40
+activity#com.ubtrobot.mini.sdkdemo.ObjectDetectApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:52:5-54:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:54:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:53:9-48
+activity#com.ubtrobot.mini.sdkdemo.TakePicApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:55:5-57:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:57:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:56:9-43
+activity#com.ubtrobot.mini.sdkdemo.MouthLedApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:58:5-60:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:60:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:59:9-44
+activity#com.ubtrobot.mini.sdkdemo.SysEventApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:61:5-63:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:63:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:62:9-44
+activity#com.ubtrobot.mini.sdkdemo.SysApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:64:5-66:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:66:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:65:9-39
+activity#com.ubtrobot.mini.sdkdemo.StandupApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:67:5-69:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:69:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:68:9-43
+activity#com.ubtrobot.mini.sdkdemo.SkillApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:70:5-72:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:72:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:71:9-41
+activity#com.ubtrobot.mini.sdkdemo.PowerApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:73:5-75:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:75:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:74:9-41
+activity#com.ubtrobot.mini.sdkdemo.BehaviorActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:76:5-78:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:78:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:77:9-41
+activity#com.ubtrobot.mini.sdkdemo.RobotInitActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:79:5-81:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:81:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:80:9-42
+activity#com.ubtrobot.mini.sdkdemo.DiscorverActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:82:5-84:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:84:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:83:9-42
+activity#com.ubtrobot.mini.sdkdemo.PhoneCallApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:85:5-87:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:87:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:86:9-45
+activity#com.ubtrobot.mini.sdkdemo.ApkSilentInstallerApiActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:89:5-90:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:90:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:89:15-60
+activity#com.ubtrobot.mini.sdkdemo.BuiltInSkillCallTestActivity
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:91:5-92:42
+	android:theme
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:92:9-40
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:91:15-59
+service#com.ubtrobot.mini.sdkdemo.DemoSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:94:5-97:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:95:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:94:14-39
+meta-data#master.skill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:96:7-88
+	android:resource
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:96:46-85
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:96:18-45
+service#com.ubtrobot.mini.sdkdemo.skills.InterruptibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:99:5-102:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:100:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:99:14-55
+service#com.ubtrobot.mini.sdkdemo.skills.UnInterruptibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:104:5-107:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:105:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:104:14-57
+service#com.ubtrobot.mini.sdkdemo.skills.ParallelSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:110:5-113:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:111:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:110:14-50
+service#com.ubtrobot.mini.sdkdemo.skills.NoRecordInterrutibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:115:5-118:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:116:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:115:14-62
+service#com.ubtrobot.mini.sdkdemo.skills.NoRecordUnInterrutibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:120:5-123:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:121:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:120:14-64
+service#com.ubtrobot.mini.sdkdemo.skills.LowpowerInterruptibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:125:5-128:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:126:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:125:14-63
+service#com.ubtrobot.mini.sdkdemo.skills.LowpowerUnInterruptibleSkill
+ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:130:5-133:15
+	android:exported
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:131:9-32
+	android:name
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml:130:14-65
+uses-sdk
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:5:5-7:41
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:7:5-9:41
+MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:7:5-9:41
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:7:5-9:41
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-fragment:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/7a45fc9bb0d437e59371c51df318ea6b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/7a45fc9bb0d437e59371c51df318ea6b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/97f259f2e22fbb9a8e12470b9d3570aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/97f259f2e22fbb9a8e12470b9d3570aa/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/b812a5ce2358267fa492fdd55656ba0c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/b812a5ce2358267fa492fdd55656ba0c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/292cd3c2bf59fa49cac1ccdca7af0c64/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/292cd3c2bf59fa49cac1ccdca7af0c64/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3732b6650bb7d175927825695589c56a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3732b6650bb7d175927825695589c56a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/d6d07588f7d4ff6a9d61d688ac8b866f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/d6d07588f7d4ff6a9d61d688ac8b866f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/347923c0d93e497a3bd3fb2435ed5f90/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/347923c0d93e497a3bd3fb2435ed5f90/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/ce93ea2d5b0cb10ca158e69ed0a27613/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/ce93ea2d5b0cb10ca158e69ed0a27613/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/5c81b10bbd743d952aae60a54b694cbc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/5c81b10bbd743d952aae60a54b694cbc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3689d87a0d0bcae3383b606f44723f64/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/3689d87a0d0bcae3383b606f44723f64/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/f68dcab8ba63e61f4ba99f05b7adff22/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/f68dcab8ba63e61f4ba99f05b7adff22/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/60d4912f847f124e4241b6194c4e19b4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/60d4912f847f124e4241b6194c4e19b4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/189ceb1cbde6f1ec4d670a8f027616f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/189ceb1cbde6f1ec4d670a8f027616f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/605b602b73073ff0941fe2000a5b1d07/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/605b602b73073ff0941fe2000a5b1d07/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/34e280d4bda44356d130195a10db3300/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/34e280d4bda44356d130195a10db3300/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/18ff43277086e888a4920444f3ac07fd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/18ff43277086e888a4920444f3ac07fd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/bb6af336654d7584a6e8020dc68831bc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/bb6af336654d7584a6e8020dc68831bc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/1f466dfd8da41e9b869b889db41fc5c2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/1f466dfd8da41e9b869b889db41fc5c2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/a1577b37d8e41fdbccd6a2c4099c1983/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/a1577b37d8e41fdbccd6a2c4099c1983/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/a84d07ba89fef7f4faa86b502dee8a31/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/a84d07ba89fef7f4faa86b502dee8a31/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/80951b9ec0f4c6a9552252d6c7c374fd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/80951b9ec0f4c6a9552252d6c7c374fd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/c079bfe20e46de89a17943e005ddffcb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/c079bfe20e46de89a17943e005ddffcb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/265045bb53ca1094323e01f20dd32927/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/265045bb53ca1094323e01f20dd32927/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/20435770c27e9902ef5ce025abdbaf5d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/20435770c27e9902ef5ce025abdbaf5d/AndroidManifest.xml:20:5-44
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		ADDED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+		INJECTED from /home/mich/Scrivania/ubt_alphamini_app_demo-master/app/src/main/AndroidManifest.xml
+uses-permission#com.ubtrobot.master.permission.MASTER_SYSTEM_SERVICE
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:12:5-92
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:12:22-89
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:14:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:15:5-75
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:15:22-72
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:17:5-76
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:11:5-76
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:11:5-76
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:17:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:18:5-76
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:12:5-76
+MERGED from [:utillib-1.2.8:] /home/mich/.gradle/caches/transforms-2/files-2.1/c62e7087268311a8a1215fbd6fee7286/AndroidManifest.xml:12:5-76
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:18:22-73
+uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:21:5-86
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:21:22-83
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:23:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:25:22-65
+uses-permission#android.permission.CHANGE_CONFIGURATION
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:26:22-76
+uses-permission#android.permission.KILL_BACKGROUND_PROCESSES
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:27:5-84
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:27:22-81
+uses-permission#com.ubtechinc.contact.PROVIDER
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:28:5-70
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:28:22-67
+uses-permission#com.harvic.contentProviderBlog.read
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:29:5-75
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:29:22-72
+uses-permission#com.ubtrobot.analytics.permissions.ANALYTICS
+ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:32:5-84
+	android:name
+		ADDED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/db578087f21404c3165953be5bd2680a/AndroidManifest.xml:32:22-81
