@@ -39,6 +39,8 @@
     <activity
         android:name=".ActionApiActivity"
         android:theme="@style/AppTheme"/>
+      <activity android:name=".VoskActivity"
+            android:theme="@style/AppTheme"/>
     <activity
         android:name=".ExpressApiActivity"
         android:theme="@style/AppTheme"/>

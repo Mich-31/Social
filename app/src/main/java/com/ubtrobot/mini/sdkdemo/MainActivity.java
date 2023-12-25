@@ -104,6 +104,10 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, SpeechToText.class));
     }
 
+    public void voskApiTest(View view) {
+        startActivity(new Intent(this, VoskActivity.class));
+    }
+
     public void ApkInstallTest(View view) {
         startActivity(new Intent(this, ApkSilentInstallerApiActivity.class));
     }
