@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.vosk.Model;
@@ -26,7 +28,12 @@ import org.vosk.android.SpeechService;
 import org.vosk.android.SpeechStreamService;
 import org.vosk.android.StorageService;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Locale;
 
 public class SpeechToText extends Activity implements RecognitionListener {
@@ -138,18 +145,138 @@ public class SpeechToText extends Activity implements RecognitionListener {
             String textValue = jsonResult.optString("text", "").trim();
 
             if (!textValue.isEmpty() && !textValue.equals(lastRecognizedText)) {
+
                 result += textValue + "\n";
                 resultView.setText(result);
 
                 Log.e(TAG, "Risultato parziale: " + result);
 
-                textToSpeech.speak(textValue, TextToSpeech.QUEUE_FLUSH, null);
+                speechService.stop();
+                speechService = null;
+
+                AgentRequest request = new AgentRequest();
+
+                request.setRobot_id("ROBOT-0001");
+
+                request.setAuth_id("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo ID autenticazione
+                request.setText(result);
+
+                new SendPostRequestTask().execute(request);
+
+                result = "";
+
+                //textToSpeech.speak(textValue, TextToSpeech.QUEUE_FLUSH, null);
 
                 lastRecognizedText = textValue;
             }
 
         } catch (JSONException e) {
             Log.e(TAG, "Errore durante il parsing JSON: " + e.getMessage());
+        }
+    }
+
+    public class AgentRequest {
+        String auth_id;
+        String robot_id;
+        String text;
+
+        public String getAuth_id() {
+            return auth_id;
+        }
+
+        public void setAuth_id(String auth_id) {
+            this.auth_id = auth_id;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getRobot_id() {
+            return robot_id;
+        }
+
+        public void setRobot_id(String robot_id) {
+            this.robot_id = robot_id;
+        }
+    }
+
+    public class AgentResponse {
+        String action;
+        String answer;
+
+        public String getAction() {
+            return action;
+        }
+
+        public void setAction(String action) {
+            this.action = action;
+        }
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(String answer) {
+            this.answer = answer;
+        }
+    }
+
+    public AgentResponse sendPostRequest(AgentRequest requestObj) {
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL("https://alpha-mini.azurewebsites.net/agent");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+            urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setDoOutput(true);
+
+            try(OutputStream os = urlConnection.getOutputStream()) {
+                byte[] input = new Gson().toJson(requestObj).getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            try(BufferedReader br = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                return new Gson().fromJson(response.toString(), AgentResponse.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        return null;
+    }
+    private class SendPostRequestTask extends AsyncTask<AgentRequest, Void, AgentResponse> {
+        @Override
+        protected AgentResponse doInBackground(AgentRequest... params) {
+            return sendPostRequest(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(AgentResponse result) {
+            if (result != null) {
+                // Aggiorna l'interfaccia utente con la risposta qui
+                Log.e(TAG, "Risposta dall'API: " + result.getAnswer());
+                // Ad esempio, potresti voler dire la risposta
+                textToSpeech.speak(result.getAnswer(), TextToSpeech.QUEUE_FLUSH, null);
+                while(textToSpeech.isSpeaking()){
+
+                }
+                recognizeMicrophone();
+            }
         }
     }
 
