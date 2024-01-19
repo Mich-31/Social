@@ -21,7 +21,7 @@ public class SpeechToTextService extends Service {
     @Override
     public void onStart(Intent intent, int startid)
     {
-        Intent intents = new Intent(getBaseContext(),SpeechToText.class);
+        Intent intents = new Intent(getBaseContext(), MainActivity.class);
         intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intents);
         Toast.makeText(this, "My Service Started", Toast.LENGTH_LONG).show();

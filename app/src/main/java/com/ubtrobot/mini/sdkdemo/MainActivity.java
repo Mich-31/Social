@@ -1,10 +1,14 @@
 package com.ubtrobot.mini.sdkdemo;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+
+import java.util.List;
 
 /**
  * Created by lulin.wu on 2018/6/19.
@@ -16,6 +20,22 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+        // This is the code to find the running services
+        /*ActivityManager am = (ActivityManager)this.getSystemService(Activity.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> rs = am.getRunningServices(50);
+
+        for (int i=0; i<rs.size(); i++) {
+            ActivityManager.RunningServiceInfo rsi = rs.get(i);
+            Log.i("Service", "Process " + rsi.process + " with component " + rsi.service.getClassName());
+        }
+
+        //am.killBackgroundProcesses("com.ubtechinc.alphamini.speech");
+
+        Intent intents = new Intent(getBaseContext(),SpeechToText.class);
+        intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intents);*/
+
     }
 
     public void actionApiTest(View view) {

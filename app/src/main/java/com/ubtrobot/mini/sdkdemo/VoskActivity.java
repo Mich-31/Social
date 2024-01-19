@@ -69,7 +69,6 @@ public class VoskActivity extends Activity implements RecognitionListener {
                 (exception) -> setErrorState("Failed to unpack the model " + exception.getMessage()));
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -85,6 +84,7 @@ public class VoskActivity extends Activity implements RecognitionListener {
             }
         }
     }
+
 
     @Override
     public void onDestroy() {
