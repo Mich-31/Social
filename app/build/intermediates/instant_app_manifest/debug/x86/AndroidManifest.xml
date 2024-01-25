@@ -6,7 +6,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
+        android:minSdkVersion="21"
         android:targetSdkVersion="28" />
 
     <uses-permission android:name="com.ubtrobot.master.permission.MASTER" />
@@ -14,6 +14,7 @@
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" -->
     <!-- tools:ignore="ProtectedPermissions" /> -->
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,7 +22,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="com.ubtrobot.master.permission.MASTER_SYSTEM_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -58,6 +58,9 @@
         </activity>
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.ActionApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.VoskActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.ExpressApiActivity"
@@ -117,6 +120,15 @@
             android:name="com.ubtrobot.mini.sdkdemo.BuiltInSkillCallTestActivity"
             android:theme="@style/AppTheme" />
 
+        <receiver android:name="com.ubtrobot.mini.sdkdemo.Autostart" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.SpeechToTextService"
+            android:enabled="true" />
         <service
             android:name="com.ubtrobot.mini.sdkdemo.DemoSkill"
             android:exported="true" >

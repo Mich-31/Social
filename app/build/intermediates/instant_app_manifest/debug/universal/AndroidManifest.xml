@@ -6,7 +6,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
+        android:minSdkVersion="21"
         android:targetSdkVersion="28" />
 
     <uses-permission android:name="com.ubtrobot.master.permission.MASTER" />
@@ -58,6 +58,9 @@
         </activity>
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.ActionApiActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.VoskActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.ExpressApiActivity"

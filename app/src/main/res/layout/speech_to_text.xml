@@ -10,6 +10,15 @@
     tools:context=".MainActivity">
 
     <!--To add text in the app-->
+
+    <TextView
+        android:id="@+id/result_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:scrollbars="vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

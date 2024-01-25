@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.ubtrobot.mini.sdkdemo"
-        minSdkVersion 19
+        minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
         versionCode 1
@@ -49,6 +49,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            assets.srcDirs += "$buildDir/generated/assets"
+        }
+    }
 }
 
 dependencies {
@@ -61,4 +67,18 @@ dependencies {
     implementation(name: 'phonecall-sdk-release', ext: 'aar')
     implementation(name: 'utillib-1.2.8', ext: 'aar')
     implementation 'com.google.code.gson:gson:2.7'
+    implementation 'net.java.dev.jna:jna:5.13.0@aar'
+    implementation 'com.alphacephei:vosk-android:0.3.47@aar'
 }
+
+tasks.register('genUUID') {
+    def uuid = UUID.randomUUID().toString()
+    def odir = file("$buildDir/generated/assets/model-it")
+    def ofile = file("$odir/uuid")
+    doLast {
+        mkdir odir
+        ofile.text = uuid
+    }
+}
+
+preBuild.dependsOn(genUUID)

@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Fri Dec 15 15:33:14 CET 2023
-0.base=/home/mich/Scrivania/ubt_alphamini_app_demo-master/app/build/intermediates/transforms/dexMerger/debug/0
-0.path=classes.dex
-count=1
-0.baseType=DIRECTORY
-0.set=DEX
