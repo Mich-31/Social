@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\aless\\Documents\\GitHub\\Social\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "/home/mich/Scrivania/Social/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\aless\\.gradle\\caches\\transforms-2\\files-2.1\\71001c5bdaba44f9bfc47c38578c50ca\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "/home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/res/values-watch-v20/values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

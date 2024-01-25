@@ -19,6 +19,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="com.ubtrobot.master.permission.MASTER_SYSTEM_SERVICE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -111,6 +119,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.SpeechToText"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.CameraActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.ApkSilentInstallerApiActivity"
