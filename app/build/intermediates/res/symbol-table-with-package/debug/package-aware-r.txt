@@ -676,6 +676,7 @@ id buttonPanel
 id callstatus
 id callstatustv
 id calltel
+id captureButton
 id center
 id center_horizontal
 id center_vertical
@@ -735,6 +736,7 @@ id progress_horizontal
 id radio
 id recognize_mic
 id result_text
+id result_text2
 id result_tv
 id right
 id right_icon
@@ -769,6 +771,7 @@ id start
 id stop
 id submenuarrow
 id submit_area
+id surfaceView
 id switch_btn
 id tabMode
 id tag_transition_group
@@ -837,6 +840,7 @@ layout activity_skill_api
 layout activity_small_action
 layout apk_silent_installer_api
 layout behavior_activity
+layout cam_activity
 layout discover_layout
 layout express_api_layout
 layout face_api_layout

@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 
     public void faceApiTest(View view) {
         Intent intent = new Intent();
-        intent.setClass(this, FaceApiActivity.class);
+        intent.setClass(this, CameraActivity.class);
         startActivity(intent);
     }
 
