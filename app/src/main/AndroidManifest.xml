@@ -105,11 +105,7 @@
       </receiver>
 
       <service android:enabled="true" android:name=".SpeechToTextService" />
-
-      <service android:name=".DemoSkill"
-        android:exported="true">
-      <meta-data android:name="master.skill" android:resource="@xml/demo_skill_path" />
-    </service>
+      <service android:enabled="true" android:name=".CameraService" />
 
     <service android:name=".skills.InterruptibleSkill"
         android:exported="true">

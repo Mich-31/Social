@@ -10,11 +10,14 @@ public class Autostart extends BroadcastReceiver
 {
     public void onReceive(Context context, Intent arg1)
     {
-        Intent intent = new Intent(context,SpeechToTextService.class);
+        Intent intent_tts = new Intent(context, SpeechToTextService.class);
+        Intent intent_camera = new Intent(context, CameraService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(intent);
+            context.startForegroundService(intent_tts);
+            context.startForegroundService(intent_camera);
         } else {
-            context.startService(intent);
+            context.startService(intent_tts);
+            context.startService(intent_camera);
         }
         Log.i("Autostart", "started");
     }
