@@ -21,8 +21,9 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-  <application
+    <application
       android:name=".DemoApp"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
@@ -112,8 +113,18 @@
           </intent-filter>
       </receiver>
 
-      <service android:enabled="true" android:name=".SpeechToTextService" />
+<service android:enabled="true" android:name=".TTSService" />
       <service android:enabled="true" android:name=".CameraService" />
+
+      <service
+          android:name=".ImageUploadService" />
+
+      <service
+          android:name=".SpeechToTextService" />
+
+        <service
+            android:name=".ImageCaptureJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
     <service android:name=".skills.InterruptibleSkill"
         android:exported="true">
