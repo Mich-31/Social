@@ -298,48 +298,6 @@ public class SpeechToText extends Activity implements RecognitionListener {
         //setUiState(STATE_DONE);
     }
 
-    /*private void setUiState(int state) {
-        switch (state) {
-            case STATE_START:
-                resultView.setText(R.string.preparing);
-                resultView.setMovementMethod(new ScrollingMovementMethod());
-                findViewById(R.id.recognize_mic).setEnabled(false);
-                findViewById(R.id.pause).setEnabled((false));
-                break;
-            case STATE_READY:
-                resultView.setText(R.string.ready);
-                ((Button) findViewById(R.id.recognize_mic)).setText(R.string.recognize_microphone);
-                findViewById(R.id.recognize_mic).setEnabled(true);
-                findViewById(R.id.pause).setEnabled((false));
-                break;
-            case STATE_DONE:
-                ((Button) findViewById(R.id.recognize_mic)).setText(R.string.recognize_microphone);
-                findViewById(R.id.recognize_mic).setEnabled(true);
-                findViewById(R.id.pause).setEnabled((false));
-                ((ToggleButton) findViewById(R.id.pause)).setChecked(false);
-                break;
-            case STATE_FILE:
-                resultView.setText(getString(R.string.starting));
-                findViewById(R.id.recognize_mic).setEnabled(false);
-                findViewById(R.id.pause).setEnabled((false));
-                break;
-            case STATE_MIC:
-                ((Button) findViewById(R.id.recognize_mic)).setText(R.string.stop_microphone);
-                resultView.setText(getString(R.string.say_something));
-                findViewById(R.id.recognize_mic).setEnabled(true);
-                findViewById(R.id.pause).setEnabled((true));
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + state);
-        }
-    }*/
-
-    /*private void setErrorState(String message) {
-        resultView.setText(message);
-        ((Button) findViewById(R.id.recognize_mic)).setText(R.string.recognize_microphone);
-        findViewById(R.id.recognize_mic).setEnabled(false);
-    }*/
-
     private void recognizeMicrophone() {
         if (speechService != null) {
             //setUiState(STATE_DONE);
@@ -356,13 +314,5 @@ public class SpeechToText extends Activity implements RecognitionListener {
             }
         }
     }
-
-    /*private void pause(boolean checked) {
-        if (speechService != null) {
-            speechService.setPause(checked);
-        }
-    }*/
-
-
 
 }

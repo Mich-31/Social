@@ -28,6 +28,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="com.ubtrobot.master.permission.MASTER_SYSTEM_SERVICE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -137,8 +138,16 @@
         </receiver>
 
         <service
-            android:name="com.ubtrobot.mini.sdkdemo.SpeechToTextService"
+            android:name="com.ubtrobot.mini.sdkdemo.TTSService"
             android:enabled="true" />
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.CameraService"
+            android:enabled="true" />
+        <service android:name="com.ubtrobot.mini.sdkdemo.ImageUploadService" />
+        <service android:name="com.ubtrobot.mini.sdkdemo.SpeechToTextService" />
+        <service
+            android:name="com.ubtrobot.mini.sdkdemo.ImageCaptureJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name="com.ubtrobot.mini.sdkdemo.DemoSkill"
             android:exported="true" >
