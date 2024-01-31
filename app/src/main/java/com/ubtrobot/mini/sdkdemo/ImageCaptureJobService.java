@@ -325,7 +325,7 @@ public class ImageCaptureJobService extends Service {
             String twoHyphens = "--";
             String boundary = "*****";
 
-            URL url = new URL("https://yourserver.com/upload-image"); // Sostituisci con l'URL del tuo server
+            URL url = new URL("https://alpha-mini.azurewebsites.net/upload-image"); // Sostituisci con l'URL del tuo server
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);
@@ -341,7 +341,7 @@ public class ImageCaptureJobService extends Service {
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\"auth_id\"" + lineEnd);
             dos.writeBytes(lineEnd);
-            dos.writeBytes("Your_AUTH_ID"); // Sostituisci con il tuo AUTH_ID
+            dos.writeBytes("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo AUTH_ID
             dos.writeBytes(lineEnd);
 
             dos.writeBytes(twoHyphens + boundary + lineEnd);
