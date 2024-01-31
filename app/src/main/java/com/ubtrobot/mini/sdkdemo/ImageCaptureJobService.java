@@ -16,6 +16,7 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.media.Image;
 import android.media.ImageReader;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,10 +31,18 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Timer;
@@ -285,8 +294,156 @@ public class ImageCaptureJobService extends Service {
         try (OutputStream output = new FileOutputStream(imageFilePath)) {
             output.write(bytes);
             Log.d(TAG, "Image saved to: " + imageFilePath);
+
+            new SendImageFileTask().execute(imageFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private class SendImageFileTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            String filePath = params[0];
+            // Implementa la logica di invio del file qui
+            sendImageFileToServer(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            // Gestisci qualsiasi azione post-invio, come mostrare un messaggio all'utente
+        }
+    }
+
+    public AgentResponse sendImageFileToServer(String imagePath) {
+        HttpURLConnection urlConnection = null;
+        DataOutputStream dos = null;
+        FileInputStream fis = null;
+        try {
+            String lineEnd = "\r\n";
+            String twoHyphens = "--";
+            String boundary = "*****";
+
+            URL url = new URL("https://yourserver.com/upload-image"); // Sostituisci con l'URL del tuo server
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");
+            urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+            urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            urlConnection.setRequestProperty("file", imagePath);
+
+            dos = new DataOutputStream(urlConnection.getOutputStream());
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"auth_id\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes("Your_AUTH_ID"); // Sostituisci con il tuo AUTH_ID
+            dos.writeBytes(lineEnd);
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + imagePath + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            fis = new FileInputStream(new File(imagePath));
+            int bytesAvailable = fis.available();
+            int bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
+            byte[] buffer = new byte[bufferSize];
+
+            int bytesRead = fis.read(buffer, 0, bufferSize);
+            while (bytesRead > 0) {
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fis.available();
+                bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
+                bytesRead = fis.read(buffer, 0, bufferSize);
+            }
+
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            // Ottieni la risposta dal server
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Converti la risposta in oggetto AgentResponse
+                return new Gson().fromJson(response.toString(), AgentResponse.class);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) fis.close();
+                if (dos != null) dos.flush();
+                if (dos != null) dos.close();
+                if (urlConnection != null) urlConnection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public class AgentRequest {
+        String auth_id;
+        String robot_id;
+        String text;
+
+        public String getAuth_id() {
+            return auth_id;
+        }
+
+        public void setAuth_id(String auth_id) {
+            this.auth_id = auth_id;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getRobot_id() {
+            return robot_id;
+        }
+
+        public void setRobot_id(String robot_id) {
+            this.robot_id = robot_id;
+        }
+    }
+
+    public class AgentResponse {
+        String action;
+        String answer;
+
+        public String getAction() {
+            return action;
+        }
+
+        public void setAction(String action) {
+            this.action = action;
+        }
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(String answer) {
+            this.answer = answer;
+        }
+    }
+
 }

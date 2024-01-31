@@ -1,7 +1,5 @@
 package com.ubtrobot.mini.sdkdemo;
 
-import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,11 +7,13 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -30,6 +30,10 @@ import org.vosk.android.SpeechService;
 import org.vosk.android.StorageService;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -42,9 +46,16 @@ public class TTSService extends Service implements RecognitionListener{
     private Model model;
     private SpeechService speechService;
     private TextToSpeech textToSpeech;
-    private String result;
+    // private String result;
     private String lastRecognizedText = "";
     private static final String CHANNEL_ID = "TTSService";
+    private AudioRecord audioRecord;
+    private boolean isRecording;
+    private String audioFilePath = "app/audio"; // Definisci il percorso del file qui
+    private static final int SAMPLE_RATE = 16000;
+    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
+    private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    private int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
 
     @Override
     public void onCreate() {
@@ -72,6 +83,8 @@ public class TTSService extends Service implements RecognitionListener{
             // Permission is granted, proceed with initialization
             initModel();
         }
+
+
     }
 
     private void createNotificationChannel() {
@@ -110,14 +123,61 @@ public class TTSService extends Service implements RecognitionListener{
         StorageService.unpack(this, "model-it", "model",
                 (model) -> {
                     this.model = model;
-                    Toast.makeText(this, "Sono pronto", Toast.LENGTH_SHORT);
                     speakText("Sono pronto");
                     recognizeMicrophone();
+                    startAudioRecording();
                 },
                 (exception) -> {
                     Log.e(TAG, "Failed to unpack the model: " + exception.getMessage());
                 }
         );
+    }
+
+    private void startAudioRecording() {
+        audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, bufferSize);
+        audioRecord.startRecording();
+        isRecording = true;
+
+        Thread recordingThread = new Thread(new Runnable() {
+            public void run() {
+                writeAudioDataToFile();
+            }
+        }, "AudioRecorder Thread");
+        recordingThread.start();
+    }
+
+    private void stopAudioRecording() {
+        if (audioRecord != null) {
+            isRecording = false;
+            audioRecord.stop();
+            audioRecord.release();
+            audioRecord = null;
+        }
+    }
+
+    private void writeAudioDataToFile() {
+        byte data[] = new byte[bufferSize];
+        FileOutputStream os = null;
+
+        try {
+            os = new FileOutputStream(audioFilePath);
+            while (isRecording) {
+                int read = audioRecord.read(data, 0, bufferSize);
+                if (read != AudioRecord.ERROR_INVALID_OPERATION) {
+                    os.write(data, 0, read);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void recognizeMicrophone() {
@@ -133,6 +193,73 @@ public class TTSService extends Service implements RecognitionListener{
                 Log.e(TAG, "Error initializing recognizer: " + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public void onPartialResult(String s) {
+
+    }
+
+    @Override
+    public void onResult(String s) {
+        try {
+            JSONObject jsonResult = new JSONObject(s);
+            String textValue = jsonResult.optString("text", "").trim();
+
+            if (!textValue.equals(lastRecognizedText) && textValue.contains("ehy mario")){
+
+                stopAudioRecording();
+                speechService.stop();
+                speechService = null;
+
+                speakText("Ricevuto");
+
+                //AgentRequest request = new AgentRequest();
+                //request.setRobot_id("ROBOT-0001");
+                //request.setAuth_id("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo ID autenticazione
+
+                new SendAudioFileTask().execute(audioFilePath);
+
+                lastRecognizedText = textValue;
+
+                /*
+                result += textValue + "\n";
+                speakText(result);
+
+                Log.e(TAG, "Risultato parziale: " + result);
+
+                speechService.stop();
+                speechService = null;
+                AgentRequest request = new AgentRequest();
+                request.setRobot_id("ROBOT-0001");
+                request.setAuth_id("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo ID autenticazione
+                request.setText(result);
+                speakText("Ricevuto");
+                new SendPostRequestTask().execute(request);
+                result = "";
+                //textToSpeech.speak(textValue, TextToSpeech.QUEUE_FLUSH, null);
+                lastRecognizedText = textValue;
+                */
+            }
+
+        } catch (JSONException e) {
+            Log.e(TAG, "Errore durante il parsing JSON: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void onFinalResult(String s) {
+
+    }
+
+    @Override
+    public void onError(Exception e) {
+
+    }
+
+    @Override
+    public void onTimeout() {
+
     }
 
     @Override
@@ -152,13 +279,83 @@ public class TTSService extends Service implements RecognitionListener{
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    private void sendTextToServer(String text) {
-        AgentRequest request = new AgentRequest();
-        request.setRobot_id("ROBOT-0001");
-        request.setAuth_id("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ");
-        request.setText(text);
+    public AgentResponse sendAudioFileToServer(String audioFilePath) {
+        HttpURLConnection urlConnection = null;
+        DataOutputStream dos = null;
+        FileInputStream fis = null;
+        try {
+            String lineEnd = "\r\n";
+            String twoHyphens = "--";
+            String boundary = "*****";
 
-        new SendPostRequestTask().execute(request);
+            URL url = new URL("https://alpha-mini.azurewebsites.net/upload-audio");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");
+            urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+            urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            urlConnection.setRequestProperty("file", audioFilePath);
+
+            dos = new DataOutputStream(urlConnection.getOutputStream());
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"auth_id\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo AUTH_ID
+            dos.writeBytes(lineEnd);
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + audioFilePath + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            fis = new FileInputStream(new File(audioFilePath));
+            int bytesAvailable = fis.available();
+            int bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
+            byte[] buffer = new byte[bufferSize];
+
+            int bytesRead = fis.read(buffer, 0, bufferSize);
+            while (bytesRead > 0) {
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fis.available();
+                bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
+                bytesRead = fis.read(buffer, 0, bufferSize);
+            }
+
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            // Ottieni la risposta dal server
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Converti la risposta in oggetto AgentResponse
+                return new Gson().fromJson(response.toString(), AgentResponse.class);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) fis.close();
+                if (dos != null) dos.flush();
+                if (dos != null) dos.close();
+                if (urlConnection != null) urlConnection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public AgentResponse sendPostRequest(AgentRequest requestObj) {
@@ -195,62 +392,25 @@ public class TTSService extends Service implements RecognitionListener{
         return null;
     }
 
-    @Override
-    public void onPartialResult(String s) {
+    // Classe AsyncTask per inviare file audio al server
+    private class SendAudioFileTask extends AsyncTask<String, Void, AgentResponse> {
+        @Override
+        protected AgentResponse doInBackground(String... params) {
+            // Invia un file audio
+            return sendAudioFileToServer(params[0]);
+        }
 
-    }
-
-    @Override
-    public void onResult(String s) {
-        try {
-            JSONObject jsonResult = new JSONObject(s);
-            String textValue = jsonResult.optString("text", "").trim();
-
-            if (!textValue.isEmpty() && !textValue.equals(lastRecognizedText)) {
-
-                result += textValue + "\n";
-                speakText(result);
-
-                Log.e(TAG, "Risultato parziale: " + result);
-
-                speechService.stop();
-                speechService = null;
-
-                AgentRequest request = new AgentRequest();
-
-                request.setRobot_id("ROBOT-0001");
-
-                request.setAuth_id("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo ID autenticazione
-                request.setText(result);
-
-                new SendPostRequestTask().execute(request);
-
-                result = "";
-
-                //textToSpeech.speak(textValue, TextToSpeech.QUEUE_FLUSH, null);
-
-                lastRecognizedText = textValue;
+        @Override
+        protected void onPostExecute(AgentResponse result) {
+            if (result != null) {
+                // Aggiorna l'interfaccia utente con la risposta qui
+                Log.e(TAG, "Risposta dall'API: " + result.getAnswer());
+                recognizeMicrophone();
+                startAudioRecording();
             }
-
-        } catch (JSONException e) {
-            Log.e(TAG, "Errore durante il parsing JSON: " + e.getMessage());
         }
     }
 
-    @Override
-    public void onFinalResult(String s) {
-
-    }
-
-    @Override
-    public void onError(Exception e) {
-
-    }
-
-    @Override
-    public void onTimeout() {
-
-    }
 
     // Classe AsyncTask per inviare richieste POST al server
     private class SendPostRequestTask extends AsyncTask<AgentRequest, Void, AgentResponse> {
@@ -262,7 +422,15 @@ public class TTSService extends Service implements RecognitionListener{
         @Override
         protected void onPostExecute(AgentResponse result) {
             if (result != null) {
+                // Aggiorna l'interfaccia utente con la risposta qui
                 Log.e(TAG, "Risposta dall'API: " + result.getAnswer());
+                // Ad esempio, potresti voler dire la risposta
+                textToSpeech.speak(result.getAnswer(), TextToSpeech.QUEUE_FLUSH, null);
+                while(textToSpeech.isSpeaking()){
+
+                }
+                recognizeMicrophone();
+                startAudioRecording();
             }
         }
     }
