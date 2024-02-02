@@ -339,6 +339,8 @@ public class TTSService extends Service implements RecognitionListener{
                 }
                 in.close();
 
+                Log.d("fhjdkhdkgjkfdgjdkld", "jgkljfdlgfd");
+
                 // Converti la risposta in oggetto AgentResponse
                 return new Gson().fromJson(response.toString(), AgentResponse.class);
             }

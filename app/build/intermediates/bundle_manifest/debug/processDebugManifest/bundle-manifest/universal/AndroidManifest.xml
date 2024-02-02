@@ -130,6 +130,9 @@
         <activity
             android:name="com.ubtrobot.mini.sdkdemo.BuiltInSkillCallTestActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.ubtrobot.mini.sdkdemo.ImageCaptureActivity"
+            android:theme="@style/AppTheme" />
 
         <receiver android:name="com.ubtrobot.mini.sdkdemo.Autostart" >
             <intent-filter>
@@ -148,13 +151,6 @@
         <service
             android:name="com.ubtrobot.mini.sdkdemo.ImageCaptureJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name="com.ubtrobot.mini.sdkdemo.DemoSkill"
-            android:exported="true" >
-            <meta-data
-                android:name="master.skill"
-                android:resource="@xml/demo_skill_path" />
-        </service>
         <service
             android:name="com.ubtrobot.mini.sdkdemo.skills.InterruptibleSkill"
             android:exported="true" >

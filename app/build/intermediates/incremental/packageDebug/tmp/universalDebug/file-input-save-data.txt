@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jan 29 15:44:42 CET 2024
+#Fri Feb 02 16:26:16 CET 2024
 23.set=ASSET
 2.base=/home/mich/Scrivania/Social/app/build/intermediates/merged_assets/debug/out
 15.set=ASSET

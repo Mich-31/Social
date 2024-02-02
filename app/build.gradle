@@ -73,6 +73,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'net.java.dev.jna:jna:5.13.0@aar'
     implementation 'com.alphacephei:vosk-android:0.3.47@aar'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 }
 
 tasks.register('genUUID') {

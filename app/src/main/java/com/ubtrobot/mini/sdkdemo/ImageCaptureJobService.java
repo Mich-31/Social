@@ -371,6 +371,8 @@ public class ImageCaptureJobService extends Service {
                 String inputLine;
                 StringBuffer response = new StringBuffer();
 
+                Log.d("fdhgfdndkgd", "gfdgfgdgd");
+
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }

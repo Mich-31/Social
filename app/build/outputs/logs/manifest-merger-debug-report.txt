@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:2:1-11:12
 MERGED from [:phonecall-sdk-release:] /home/mich/.gradle/caches/transforms-2/files-2.1/d96e2c9de5e85f0aa39ef5324312ebab/AndroidManifest.xml:2:1-34:12
@@ -35,22 +35,22 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/mich/.gradle/caches/tr
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/c079bfe20e46de89a17943e005ddffcb/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /home/mich/.gradle/caches/transforms-2/files-2.1/265045bb53ca1094323e01f20dd32927/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/20435770c27e9902ef5ce025abdbaf5d/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
-INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
+INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
 	package
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:4:5-40
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-171:12
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:1-169:12
 		INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:2:11-69
@@ -119,7 +119,7 @@ ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:24:5-77
 	android:name
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:24:22-74
 application
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:26:5-169:17
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:26:5-167:17
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/mich/.gradle/caches/transforms-2/files-2.1/938a29cba48b3cf8339514a370b63e1a/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:support-compat:28.0.0] /home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/AndroidManifest.xml:22:5-94
@@ -292,96 +292,96 @@ ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:107:5-10
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:108:9-40
 	android:name
 		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:107:15-59
+activity#com.ubtrobot.mini.sdkdemo.ImageCaptureActivity
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:110:9-111:46
+	android:theme
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:111:13-44
+	android:name
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:110:19-55
 receiver#com.ubtrobot.mini.sdkdemo.Autostart
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:110:7-114:18
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:113:7-117:18
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:110:17-42
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:113:17-42
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:111:11-113:27
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:114:11-116:27
 action#android.intent.action.BOOT_COMPLETED
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:112:15-77
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:115:15-77
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:112:23-74
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:115:23-74
 service#com.ubtrobot.mini.sdkdemo.TTSService
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:116:7-68
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:119:1-62
 	android:enabled
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:116:16-38
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:119:10-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:116:39-65
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:119:33-59
 service#com.ubtrobot.mini.sdkdemo.CameraService
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:117:7-71
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:120:7-71
 	android:enabled
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:117:16-38
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:120:16-38
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:117:39-68
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:120:39-68
 service#com.ubtrobot.mini.sdkdemo.ImageUploadService
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:119:7-120:48
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:122:7-123:48
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:120:11-45
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:123:11-45
 service#com.ubtrobot.mini.sdkdemo.SpeechToTextService
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:122:7-123:49
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:125:7-126:49
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:123:11-46
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:126:11-46
 service#com.ubtrobot.mini.sdkdemo.ImageCaptureJobService
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:125:9-127:72
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:128:9-130:72
 	android:permission
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:127:13-69
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:130:13-69
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:126:13-51
-service#com.ubtrobot.mini.sdkdemo.DemoSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:129:7-132:15
-	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:130:9-32
-	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:129:16-41
-meta-data#master.skill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:131:7-88
-	android:resource
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:131:46-85
-	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:131:18-45
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:129:13-51
 service#com.ubtrobot.mini.sdkdemo.skills.InterruptibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:134:5-137:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:132:5-135:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:135:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:133:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:134:14-55
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:132:14-55
+meta-data#master.skill
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:134:7-97
+	android:resource
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:134:46-94
+	android:name
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:134:18-45
 service#com.ubtrobot.mini.sdkdemo.skills.UnInterruptibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:139:5-142:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:137:5-140:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:140:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:138:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:139:14-57
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:137:14-57
 service#com.ubtrobot.mini.sdkdemo.skills.ParallelSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:145:5-148:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:143:5-146:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:146:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:144:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:145:14-50
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:143:14-50
 service#com.ubtrobot.mini.sdkdemo.skills.NoRecordInterrutibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:150:5-153:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:148:5-151:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:151:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:149:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:150:14-62
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:148:14-62
 service#com.ubtrobot.mini.sdkdemo.skills.NoRecordUnInterrutibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:155:5-158:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:153:5-156:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:156:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:154:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:155:14-64
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:153:14-64
 service#com.ubtrobot.mini.sdkdemo.skills.LowpowerInterruptibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:160:5-163:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:158:5-161:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:161:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:159:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:160:14-63
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:158:14-63
 service#com.ubtrobot.mini.sdkdemo.skills.LowpowerUnInterruptibleSkill
-ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:165:5-168:15
+ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:163:5-166:15
 	android:exported
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:166:9-32
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:164:9-32
 	android:name
-		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:165:14-65
+		ADDED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml:163:14-65
 uses-sdk
 INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/mich/Scrivania/Social/app/src/main/AndroidManifest.xml

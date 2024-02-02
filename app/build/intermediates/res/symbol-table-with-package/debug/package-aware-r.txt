@@ -833,6 +833,7 @@ layout abc_tooltip
 layout action_api_layout
 layout activity_asr
 layout activity_builtin_skill_calls
+layout activity_image_capture
 layout activity_main
 layout activity_phonecall
 layout activity_robot_init
