@@ -1,23 +1,17 @@
 package com.ubtrobot.mini.sdkdemo;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.Service;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
-import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -39,17 +33,26 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
-public class TTSService extends Service implements RecognitionListener{
+public class TTSActivity extends AppCompatActivity implements RecognitionListener {
     private static final String TAG = "TTS";
-    private static final String CHANNEL_ID = "TTSService";
     private TextToSpeech textToSpeech;
     private Model model;
     private SpeechService speechService;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private boolean permissionToRecordAccepted = false;
+    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private String lastRecognizedText = "";
+    private TextView risultato;
+    private TextView pronto;
     private MediaRecorder mediaRecorder;
     private String audioFilePath;
 
     private void startRecording() {
+        if (!permissionToRecordAccepted) {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+            return;
+        }
+
         File audioFile = null;
         try {
             audioFile = createAudioFile();
@@ -93,58 +96,33 @@ public class TTSService extends Service implements RecognitionListener{
         );
         return audio;
     }
-    
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        
-        Toast.makeText(this, "My Service TTS Started", Toast.LENGTH_LONG).show();
-        Log.d(TAG, "onStart");
 
-        createNotificationChannel();
-        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i != TextToSpeech.ERROR) {
-                    textToSpeech.setLanguage(Locale.ITALY);
-                }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tts);
+        risultato = findViewById(R.id.esito);
+        pronto = findViewById(R.id.pronto);
+
+        textToSpeech = new TextToSpeech(this, status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(Locale.ITALY);
             }
         });
-
-        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            showPermissionNotification();
-        } else {
-            initModel();
-        }
-    }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_ID,
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(serviceChannel);
-        }
-    }
-
-    private void showPermissionNotification() {
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Permission Required")
-                .setContentText("Please grant RECORD_AUDIO permission")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .build();
-
-        startForeground(1, notification);
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            if (permissionToRecordAccepted) {
+                initModel();
+            } else {
+                finish();
+            }
+        }
     }
 
     private void initModel() {
@@ -152,12 +130,14 @@ public class TTSService extends Service implements RecognitionListener{
                 (model) -> {
                     this.model = model;
                     recognizeMicrophone();
+                    pronto.setText("si può parlare!");
                 },
                 (exception) -> {
                     Log.e(TAG, "Failed to unpack the model: " + exception.getMessage());
                 }
         );
     }
+
     private void recognizeMicrophone() {
         if (speechService != null) {
             speechService.stop();
@@ -187,6 +167,7 @@ public class TTSService extends Service implements RecognitionListener{
 
             if (!textValue.equals(lastRecognizedText) && textValue.contains("ehi mario")){
 
+                risultato.setText(textValue);
                 stopRecordingAndSaveFile();
                 speechService.stop();
                 speechService = null;

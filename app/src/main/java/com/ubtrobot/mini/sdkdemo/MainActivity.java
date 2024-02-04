@@ -38,6 +38,12 @@ public class MainActivity extends Activity {
 
     }
 
+    public void TTS(View view){
+        Intent intent = new Intent();
+        intent.setClass(this, TTSActivity.class);
+        startActivity(intent);
+    }
+
     public void actionApiTest(View view) {
         Intent intent = new Intent();
         intent.setClass(this, ActionApiActivity.class);
