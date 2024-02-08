@@ -1,5 +1,7 @@
 package com.ubtrobot.mini.sdkdemo;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
@@ -29,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
@@ -179,7 +182,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
         } catch (JSONException e) {
             Log.e(TAG, "Errore durante il parsing JSON: " + e.getMessage());
-        }
+        ;}
     }
 
     @Override
@@ -208,6 +211,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             if (result != null) {
                 // Aggiorna l'interfaccia utente con la risposta qui
                 Log.e(TAG, "Risposta dall'API: " + result.getAnswer());
+                risultato.setText(result.getAnswer());
                 textToSpeech.speak(result.getAnswer(), TextToSpeech.QUEUE_FLUSH, null);
                 while(textToSpeech.isSpeaking()){
 
@@ -226,7 +230,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             String twoHyphens = "--";
             String boundary = "*****";
 
-            URL url = new URL("https://alpha-mini.azurewebsites.net/upload-audio");
+            URL url = new URL("http://10.0.2.2:8000/upload-audio");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);
@@ -313,6 +317,36 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
         public void setAnswer(String answer) {
             this.answer = answer;
+        }
+    }
+
+    public class AgentRequest {
+        String auth_id;
+        String robot_id;
+        String text;
+
+        public String getAuth_id() {
+            return auth_id;
+        }
+
+        public void setAuth_id(String auth_id) {
+            this.auth_id = auth_id;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getRobot_id() {
+            return robot_id;
+        }
+
+        public void setRobot_id(String robot_id) {
+            this.robot_id = robot_id;
         }
     }
 }

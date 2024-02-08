@@ -37,6 +37,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Timer;
@@ -53,7 +54,9 @@ public class ImageCaptureActivity extends AppCompatActivity {
     private Timer captureTimer;
     private CameraDevice cameraDevice;
     private CameraCaptureSession captureSession;
-    private static final long CAPTURE_INTERVAL = 5000; // 5 seconds
+    private static final long CAPTURE_INTERVAL = 10000; // 10 seconds
+
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +180,7 @@ public class ImageCaptureActivity extends AppCompatActivity {
 
             // Create a file to save the captured photo
             imageFilePath = getOutputMediaFile().getAbsolutePath();
+            counter++;
 
             // Set the image capture callback
             imageReader.setOnImageAvailableListener(reader -> {
@@ -235,7 +239,7 @@ public class ImageCaptureActivity extends AppCompatActivity {
         }
 
         return new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_" + System.currentTimeMillis() + ".jpg");
+                "IMG_" + counter + ".jpg");
     }
 
     private void saveImageToFile(Image image) {
@@ -272,11 +276,7 @@ public class ImageCaptureActivity extends AppCompatActivity {
         DataOutputStream dos = null;
         FileInputStream fis = null;
         try {
-            String lineEnd = "\r\n";
-            String twoHyphens = "--";
-            String boundary = "*****";
-
-            URL url = new URL("https://alpha-mini.azurewebsites.net/upload-image"); // Sostituisci con l'URL del tuo server
+            URL url = new URL("http://10.0.2.2:8000/upload-image");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);
@@ -284,26 +284,33 @@ public class ImageCaptureActivity extends AppCompatActivity {
             urlConnection.setUseCaches(false);
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+
+            String boundary = "*****";
+            String lineEnd = "\r\n";
+            String twoHyphens = "--";
+
             urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-            urlConnection.setRequestProperty("file", imagePath);
 
             dos = new DataOutputStream(urlConnection.getOutputStream());
 
             dos.writeBytes(twoHyphens + boundary + lineEnd);
-            dos.writeBytes("Content-Disposition: form-data; name=\"auth_id\"" + lineEnd);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes("ALPHA-MINI-10F5-PRWE-U9YV-ADUQ"); // Sostituisci con il tuo AUTH_ID
-            dos.writeBytes(lineEnd);
-
+            dos.writeBytes("Content-Disposition: form-data; name=\"auth_id\"" + lineEnd + lineEnd + "ALPHA-MINI-10F5-PRWE-U9YV-ADUQ" + lineEnd);
             dos.writeBytes(twoHyphens + boundary + lineEnd);
-            dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + imagePath + "\"" + lineEnd);
-            dos.writeBytes(lineEnd);
 
-            fis = new FileInputStream(new File(imagePath));
+            // Nome del file
+            String fileName = new File(imagePath).getName();
+
+            // Header del file
+            dos.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + fileName + "\"" + lineEnd);
+            dos.writeBytes("Content-Type: " + URLConnection.guessContentTypeFromName(fileName) + lineEnd + lineEnd);
+
+            // Prepara il file da inviare
+            fis = new FileInputStream(imagePath);
             int bytesAvailable = fis.available();
             int bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
             byte[] buffer = new byte[bufferSize];
 
+            // Leggi il file e scrivilo nella richiesta
             int bytesRead = fis.read(buffer, 0, bufferSize);
             while (bytesRead > 0) {
                 dos.write(buffer, 0, bufferSize);
@@ -311,11 +318,12 @@ public class ImageCaptureActivity extends AppCompatActivity {
                 bufferSize = Math.min(bytesAvailable, 1 * 1024 * 1024);
                 bytesRead = fis.read(buffer, 0, bufferSize);
             }
-
             dos.writeBytes(lineEnd);
+
+            // Fine parti
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
-            // Ottieni la risposta dal server
+            // Ottieni la risposta
             int responseCode = urlConnection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -325,13 +333,11 @@ public class ImageCaptureActivity extends AppCompatActivity {
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-
                 in.close();
 
-                // Converti la risposta in oggetto AgentResponse
+                // Converti la risposta in oggetto
                 return new Gson().fromJson(response.toString(), AgentResponse.class);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
