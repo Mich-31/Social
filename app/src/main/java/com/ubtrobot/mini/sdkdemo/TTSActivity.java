@@ -4,7 +4,9 @@ import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.media.MediaRecorder;
+import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -150,7 +152,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                 Recognizer rec = new Recognizer(model, 16000.0f);
                 speechService = new SpeechService(rec, 16000.0f);
                 speechService.startListening((RecognitionListener) this);
-                startRecording();
             } catch (IOException e) {
                 Log.e(TAG, "Error initializing recognizer: " + e.getMessage());
             }
@@ -171,10 +172,20 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             if (!textValue.equals(lastRecognizedText) && textValue.contains("ehi mario")){
 
                 risultato.setText(textValue);
-                stopRecordingAndSaveFile();
                 speechService.stop();
                 speechService = null;
+                // Crea un ToneGenerator passando il tipo di stream e il volume
+                ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                // Suona il tono per 150 ms
+                toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
+                textToSpeech.speak("Ciao, come posso aiutarti?", TextToSpeech.QUEUE_FLUSH, null);
+                while(textToSpeech.isSpeaking()){
 
+                }
+                startRecording();
+
+                stopRecordingAndSaveFile();
+                
                 new SendAudioFileTask().execute(audioFilePath);
 
                 lastRecognizedText = textValue;
