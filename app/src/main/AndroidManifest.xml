@@ -119,6 +119,10 @@
             android:name=".ImageCaptureActivity"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".SilenceDetectionRecorder"
+            android:theme="@style/AppTheme" />
+
         <receiver android:name=".Autostart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 
     public void objectDetectApiTest(View view) {
         Intent intent = new Intent();
-        intent.setClass(this, ObjectDetectApiActivity.class);
+        intent.setClass(this, SilenceDetectionRecorder.class);
         startActivity(intent);
     }
 

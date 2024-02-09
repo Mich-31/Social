@@ -695,6 +695,7 @@ id default_activity_button
 id disableHome
 id edit_query
 id end
+id esito
 id expand_activities_button
 id expanded_menu
 id fill
@@ -733,6 +734,7 @@ id pause
 id playring
 id progress_circular
 id progress_horizontal
+id pronto
 id radio
 id recognize_mic
 id result_text
@@ -839,6 +841,7 @@ layout activity_phonecall
 layout activity_robot_init
 layout activity_skill_api
 layout activity_small_action
+layout activity_tts
 layout apk_silent_installer_api
 layout behavior_activity
 layout cam_activity
@@ -1328,4 +1331,5 @@ xml demo_norecord_unin_skill
 xml demo_parallel_skill
 xml demo_skill_path
 xml demo_uninterruptible_skill
+xml network_security_config
 xml service_contact
