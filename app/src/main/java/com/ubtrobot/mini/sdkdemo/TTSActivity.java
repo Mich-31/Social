@@ -3,10 +3,13 @@ package com.ubtrobot.mini.sdkdemo;
 import static android.content.ContentValues.TAG;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.media.ToneGenerator;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -109,9 +112,12 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         risultato = findViewById(R.id.esito);
         pronto = findViewById(R.id.pronto);
 
-        textToSpeech = new TextToSpeech(this, status -> {
-            if (status != TextToSpeech.ERROR) {
-                textToSpeech.setLanguage(Locale.ITALY);
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.ITALY);
+                }
             }
         });
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
@@ -130,12 +136,25 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         }
     }
 
+    public boolean isDeviceConnectedToInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
+    }
+
     private void initModel() {
         StorageService.unpack(this, "model-it", "model",
                 (model) -> {
                     this.model = model;
                     recognizeMicrophone();
-                    pronto.setText("si può parlare!");
+                    if(isDeviceConnectedToInternet()) {
+                        pronto.setText("si può parlare!");
+                    } else {
+
+                    }
                 },
                 (exception) -> {
                     Log.e(TAG, "Failed to unpack the model: " + exception.getMessage());
