@@ -192,7 +192,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                     this.model = model;
                     recognizeMicrophone();
                     if(isDeviceConnectedToInternet()) {
-                        pronto.setText("si può parlare!");
+                        pronto.setText("Parla!");
                     } else {
 
                     }
@@ -295,8 +295,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
                 }
                 startRecording();
-
-                stopRecording();
                 
                 new SendAudioFileTask().execute(audioFilePath);
 
