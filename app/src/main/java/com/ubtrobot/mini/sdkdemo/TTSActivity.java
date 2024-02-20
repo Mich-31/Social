@@ -43,6 +43,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Locale;
 
 public class TTSActivity extends AppCompatActivity implements RecognitionListener {
@@ -75,15 +77,36 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
             recordingThread = new Thread(new Runnable() {
                 public void run() {
-                    writeAudioDataToBuffer();
+                    processAudioData();
                 }
             }, "AudioRecorder Thread");
 
             recordingThread.start();
-            // Start silence detection loop
-            detectSilence();
         } else {
             Log.e("SilenceDetection", "Failed to initialize AudioRecord");
+        }
+    }
+
+    private void processAudioData() {
+        short[] audioBuffer = new short[bufferSize];
+        byte[] byteBuffer = new byte[bufferSize * 2]; // due byte per ogni short
+
+        while (isRecording) {
+            int bytesRead = audioRecord.read(audioBuffer, 0, audioBuffer.length);
+            if (bytesRead > 0) {
+                // Converti shorts in bytes
+                ByteBuffer.wrap(byteBuffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(audioBuffer);
+
+                audioDataBuffer.write(byteBuffer, 0, bytesRead * 2); // * 2 perché ogni short è due byte
+                double energy = calculateEnergy(audioBuffer, bytesRead);
+                Log.d("SilenceDetection", "Energy: " + energy);
+                if (energy < silenceThreshold) {
+                    // Silence detected, stop recording
+                    stopRecording();
+                    Log.d("SilenceDetection", "Silence detected");
+                    break;
+                }
+            }
         }
     }
 
@@ -133,7 +156,9 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
         // Crea la directory se non esiste
         if (!storageDir.exists()) {
-            storageDir.mkdirs();
+            if (!storageDir.mkdirs()) {
+                throw new IOException("Failed to create directory: " + storageDir.getAbsolutePath());
+            }
         }
 
         // Crea un file nel percorso specificato
