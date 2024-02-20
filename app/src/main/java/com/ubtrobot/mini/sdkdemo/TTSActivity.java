@@ -61,7 +61,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     private AudioRecord audioRecord;
     private String audioFilePath;
     private boolean isRecording = false;
-    private double silenceThreshold = 0.02;
+    private double silenceThreshold = 5;
     private double energy;
     private int bufferSize = 0;
     private Thread recordingThread;
@@ -104,6 +104,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                     // Silence detected, stop recording
                     stopRecording();
                     Log.d("SilenceDetection", "Silence detected");
+
                     break;
                 }
             }
@@ -119,6 +120,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                 audioRecord = null;
                 try {
                     saveRecording();
+                    new SendAudioFileTask().execute(audioFilePath);
                 } catch (IOException e) {
                     Log.e("AudioRecorder", "Failed to save recording", e);
                 }
@@ -164,7 +166,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         // Crea un file nel percorso specificato
         File audioFile = new File(storageDir, fileName);
 
-        audioFilePath = audioFile.getAbsolutePath();
+        audioFilePath = audioFile.getCanonicalPath();
         Log.d("AudioRecorder", "File path: " + audioFilePath);
 
         // Restituisce il riferimento al file appena creato
@@ -320,8 +322,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
                 }
                 startRecording();
-                
-                new SendAudioFileTask().execute(audioFilePath);
 
                 lastRecognizedText = textValue;
             }
