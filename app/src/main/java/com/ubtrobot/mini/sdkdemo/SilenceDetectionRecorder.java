@@ -12,7 +12,8 @@ public class SilenceDetectionRecorder extends AppCompatActivity {
 
     private AudioRecord audioRecord;
     private boolean isRecording = false;
-    private double silenceThreshold = 0.1;
+    private double silenceThreshold = 0.02;
+    private double energy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,26 +34,54 @@ public class SilenceDetectionRecorder extends AppCompatActivity {
                 44100,
                 AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT,
-                bufferSize
+                bufferSize * 2 // Increase buffer size for better accuracy
         );
 
-        audioRecord.startRecording();
-        isRecording = true;
+        if (audioRecord.getState() == AudioRecord.STATE_INITIALIZED) {
+            audioRecord.startRecording();
+            isRecording = true;
 
-        // Start silence detection loop
-        detectSilence();
+            // Start silence detection loop
+            detectSilence();
+        } else {
+            Log.e("SilenceDetection", "Failed to initialize AudioRecord");
+        }
     }
 
     public void stopRecording() {
-        if (audioRecord != null) {
+        if (isRecording) {
             isRecording = false;
-            audioRecord.stop();
-            audioRecord.release();
-            audioRecord = null;
+            if (audioRecord != null) {
+                audioRecord.stop();
+                audioRecord.release();
+                audioRecord = null;
+            }
         }
     }
 
     private void detectSilence() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                short[] audioBuffer = new short[1024];
+                while (isRecording) {
+                    try {
+                        Log.d("jgisdljgdlfkjg", "gjdkfjgfdkl");
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (energy < silenceThreshold) {
+                        // Silence detected, stop recording
+                        stopRecording();
+                        Log.d("SilenceDetection", "Silence detected");
+                        break;
+                    }
+                }
+            }
+        }).start();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -60,14 +89,14 @@ public class SilenceDetectionRecorder extends AppCompatActivity {
                 while (isRecording) {
                     int bytesRead = audioRecord.read(audioBuffer, 0, audioBuffer.length);
                     if (bytesRead > 0) {
-                        double energy = calculateEnergy(audioBuffer, bytesRead);
+                        energy = calculateEnergy(audioBuffer, bytesRead);
                         Log.d("SilenceDetection", "Energy: " + energy);
-                        if (energy < silenceThreshold) {
-                            // Silence detected, stop recording
-                            stopRecording();
-                            Log.d("SilenceDetection", "Silence detected");
-                            break;
-                        }
+//                        if (energy < silenceThreshold) {
+//                            // Silence detected, stop recording
+//                            stopRecording();
+//                            Log.d("SilenceDetection", "Silence detected");
+//                            break;
+//                        }
                     }
                 }
             }
