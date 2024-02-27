@@ -16,11 +16,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -45,7 +47,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.HashMap;
 import java.util.Locale;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class TTSActivity extends AppCompatActivity implements RecognitionListener {
     private static final String TAG = "TTS";
@@ -58,14 +70,20 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     private String lastRecognizedText = "";
     private TextView risultato;
     private TextView pronto;
+
+    private TextView pronto2;
     private AudioRecord audioRecord;
     private String audioFilePath;
     private boolean isRecording = false;
-    private double silenceThreshold = 5;
+    private double silenceThreshold = 2.0234091650872004E-8;
     private double energy;
     private int bufferSize = 0;
     private Thread recordingThread;
     private ByteArrayOutputStream audioDataBuffer = new ByteArrayOutputStream();
+    private boolean first = true;
+    private boolean isSpeaking = false;
+    private final OkHttpClient client = new OkHttpClient();
+    private int counter = 0;
 
     public void startRecording() {
         bufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
@@ -75,52 +93,56 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             audioRecord.startRecording();
             isRecording = true;
 
-            recordingThread = new Thread(new Runnable() {
-                public void run() {
-                    processAudioData();
-                }
-            }, "AudioRecorder Thread");
+            Log.d("Registrazione:", "ON");
 
-            recordingThread.start();
+            processAudioData();
+            detectSilence();
+
         } else {
             Log.e("SilenceDetection", "Failed to initialize AudioRecord");
         }
     }
 
     private void processAudioData() {
-        short[] audioBuffer = new short[bufferSize];
-        byte[] byteBuffer = new byte[bufferSize * 2]; // due byte per ogni short
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                short[] audioBuffer = new short[bufferSize];
+                byte[] byteBuffer = new byte[bufferSize * 2]; // due byte per ogni short
 
-        while (isRecording) {
-            int bytesRead = audioRecord.read(audioBuffer, 0, audioBuffer.length);
-            if (bytesRead > 0) {
-                // Converti shorts in bytes
-                ByteBuffer.wrap(byteBuffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(audioBuffer);
+                while (isRecording) {
+                    int bytesRead = audioRecord.read(audioBuffer, 0, audioBuffer.length);
+                    if (bytesRead > 0) {
+                        // Converti shorts in bytes
+                        ByteBuffer.wrap(byteBuffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(audioBuffer);
 
-                audioDataBuffer.write(byteBuffer, 0, bytesRead * 2); // * 2 perché ogni short è due byte
-                double energy = calculateEnergy(audioBuffer, bytesRead);
-                Log.d("SilenceDetection", "Energy: " + energy);
-                if (energy < silenceThreshold) {
-                    // Silence detected, stop recording
-                    stopRecording();
-                    Log.d("SilenceDetection", "Silence detected");
-
-                    break;
+                        audioDataBuffer.write(byteBuffer, 0, bytesRead * 2); // * 2 perché ogni short è due byte
+                        energy = calculateEnergy(audioBuffer, bytesRead);
+                        Log.d("SilenceDetection", "Energy: " + energy);
+//                Log.d("SilenceDetection", "Energy: " + energy);
+//                if (energy < silenceThreshold) {
+//                    // Silence detected, stop recording
+//
+//
+//                    break;
+//                }
+                    }
                 }
             }
-        }
+        }).start();
     }
 
     public void stopRecording() {
         if (isRecording) {
             isRecording = false;
+            first = true;
             if (audioRecord != null) {
                 audioRecord.stop();
                 audioRecord.release();
                 audioRecord = null;
                 try {
+                    Log.d("Registrazione:", "OFF");
                     saveRecording();
-                    new SendAudioFileTask().execute(audioFilePath);
                 } catch (IOException e) {
                     Log.e("AudioRecorder", "Failed to save recording", e);
                 }
@@ -129,47 +151,62 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         }
     }
 
-    private void writeAudioDataToBuffer() {
-        byte[] data = new byte[bufferSize];
-        while (isRecording) {
-            int read = audioRecord.read(data, 0, bufferSize);
-            if (read > 0) {
-                audioDataBuffer.write(data, 0, read);
-            }
+    private void saveRecording() throws IOException {
+        File file = createAudioFile(); // Ora crea un file .wav
+        byte[] audioBytes = audioDataBuffer.toByteArray();
+
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            // Scrivi l'intestazione WAV
+            writeWavHeader(out, (short) 1, 44100, (short) 16, audioBytes.length);
+
+            // Scrivi i dati audio PCM
+            out.write(audioBytes);
+        }
+        audioDataBuffer.reset(); // Clear the buffer after saving
+
+        // Dopo aver salvato il file, prova ad inviarlo al server
+        if (isDeviceConnectedToInternet()) {
+            sendAudioFileToServer(audioFilePath);
+        } else {
+            Log.e(TAG, "Dispositivo non connesso a Internet");
         }
     }
 
-    private void saveRecording() throws IOException {
-        File file = createAudioFile(); // Assicurati che questo metodo crei un file .wav
-        try (FileOutputStream out = new FileOutputStream(file)) {
-            out.write(audioDataBuffer.toByteArray());
-        }
-        audioDataBuffer.reset(); // Clear the buffer after saving
+    private void writeWavHeader(FileOutputStream out, short channels, int sampleRate, short bitDepth, int dataSize) throws IOException {
+        ByteBuffer buffer = ByteBuffer.allocate(44);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+
+        buffer.put("RIFF".getBytes());
+        buffer.putInt(36 + dataSize); // Dimensione del file meno l'intestazione
+        buffer.put("WAVE".getBytes());
+        buffer.put("fmt ".getBytes());
+        buffer.putInt(16); // Sub-chunk size, 16 for PCM
+        buffer.putShort((short) 1); // Audio format, 1 for PCM
+        buffer.putShort(channels);
+        buffer.putInt(sampleRate);
+        buffer.putInt(sampleRate * channels * (bitDepth / 8)); // Byte rate
+        buffer.putShort((short) (channels * (bitDepth / 8))); // Block align
+        buffer.putShort(bitDepth);
+        buffer.put("data".getBytes());
+        buffer.putInt(dataSize); // Data chunk size
+
+        out.write(buffer.array());
     }
 
     private File createAudioFile() throws IOException {
-        // Crea un nome univoco per il file basato sul timestamp attuale
-        String fileName = "AUDIO_" + System.currentTimeMillis() + ".pcm";
+        counter++;
+        String fileName = "AUDIO_" + counter + ".wav"; // Modificato per usare l'estensione .wav
 
-        // Ottiene il percorso della directory esterna in cui salvare il file
-        // Assicurati che l'app abbia il permesso WRITE_EXTERNAL_STORAGE se target SDK è 28 o inferiore
-        // Per SDK 29 o superiore, usa il contesto dell'app per accedere alla directory specifica senza richiedere permessi globali
-        File storageDir = new File(Environment.getExternalStorageDirectory(), "MyAudioApp");
-
-        // Crea la directory se non esiste
-        if (!storageDir.exists()) {
-            if (!storageDir.mkdirs()) {
-                throw new IOException("Failed to create directory: " + storageDir.getAbsolutePath());
-            }
+        File mediaStorageDir = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC),
+                "MyAudioApp");
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+            throw new IOException("Failed to create directory: " + mediaStorageDir.getAbsolutePath());
         }
 
-        // Crea un file nel percorso specificato
-        File audioFile = new File(storageDir, fileName);
-
-        audioFilePath = audioFile.getCanonicalPath();
+        File audioFile = new File(mediaStorageDir, fileName);
+        audioFilePath = audioFile.getAbsolutePath();
         Log.d("AudioRecorder", "File path: " + audioFilePath);
-
-        // Restituisce il riferimento al file appena creato
         return audioFile;
     }
 
@@ -179,6 +216,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         setContentView(R.layout.activity_tts);
         risultato = findViewById(R.id.esito);
         pronto = findViewById(R.id.pronto);
+        pronto2 = findViewById(R.id.pronto2);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -186,6 +224,22 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.ITALY);
                 }
+            }
+        });
+        textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+                // Called when the TTS starts speaking.
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+                // Questo metodo viene chiamato quando TextToSpeech ha finito di parlare.
+                recognizeMicrophone();
+            }
+
+            @Override
+            public void onError(String utteranceId) {
             }
         });
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
@@ -246,15 +300,19 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     }
 
     private void detectSilence() {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 short[] audioBuffer = new short[1024];
                 while (isRecording) {
                     try {
+                        if(first) {
+                            Thread.sleep(4000);
+                            first = false;
+                        } else {
+                            Thread.sleep(1000);
+                        }
                         Log.d("jgisdljgdlfkjg", "gjdkfjgfdkl");
-                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -263,26 +321,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                         stopRecording();
                         Log.d("SilenceDetection", "Silence detected");
                         break;
-                    }
-                }
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                short[] audioBuffer = new short[1024];
-                while (isRecording) {
-                    int bytesRead = audioRecord.read(audioBuffer, 0, audioBuffer.length);
-                    if (bytesRead > 0) {
-                        energy = calculateEnergy(audioBuffer, bytesRead);
-                        Log.d("SilenceDetection", "Energy: " + energy);
-//                        if (energy < silenceThreshold) {
-//                            // Silence detected, stop recording
-//                            stopRecording();
-//                            Log.d("SilenceDetection", "Silence detected");
-//                            break;
-//                        }
                     }
                 }
             }
@@ -317,10 +355,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                 ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
                 // Suona il tono per 150 ms
                 toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
-                textToSpeech.speak("Ciao, come posso aiutarti?", TextToSpeech.QUEUE_FLUSH, null);
-                while(textToSpeech.isSpeaking()){
-
-                }
                 startRecording();
 
                 lastRecognizedText = textValue;
@@ -346,6 +380,59 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
     }
 
+    public void sendAudioFileToServer(String audioFilePath) {
+        File audioFile = new File(audioFilePath);
+        String url = "http://10.0.2.2:8000/upload-audio";
+
+        // Prepara il corpo della richiesta
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("auth_id", "ALPHA-MINI-10F5-PRWE-U9YV-ADUQ")
+                .addFormDataPart("file", audioFile.getName(),
+                        RequestBody.create(MediaType.parse("audio/wav"), audioFile))
+                .build();
+
+        // Crea la richiesta
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        // Invia la richiesta in modo asincrono
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                // Gestisci il fallimento qui
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "Risposta non riuscita: " + response.body().string());
+                } else {
+                    String responseData = response.body().string();
+                    Log.d(TAG, "Risposta ricevuta: " + responseData);
+
+                    try {
+                        JSONObject jsonResponse = new JSONObject(responseData);
+                        JSONObject responseObj = jsonResponse.optJSONObject("risposta");
+                        String output = responseObj != null ? responseObj.optString("output", "Nessuna risposta trovata.") : "Nessuna risposta trovata.";
+
+                        runOnUiThread(() -> {
+                            risultato.setText(output);
+                            textToSpeech.speak(output, TextToSpeech.QUEUE_FLUSH, null, "UniqueID");
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Errore nell'elaborazione della risposta.", Toast.LENGTH_SHORT).show());
+                    }
+                }
+            }
+        });
+    }
+
+/*
     private class SendAudioFileTask extends AsyncTask<String, Void, AgentResponse> {
         @Override
         protected AgentResponse doInBackground(String... params) {
@@ -385,7 +472,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
             urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-            urlConnection.setRequestProperty("file", audioFilePath);
+
 
             dos = new DataOutputStream(urlConnection.getOutputStream());
 
@@ -495,4 +582,5 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             this.robot_id = robot_id;
         }
     }
+ */
 }

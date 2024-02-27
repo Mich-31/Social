@@ -26,4 +26,13 @@
         android:layout_marginTop="330dp"
         android:layout_marginEnd="176dp"
         android:text="Pronto?" />
+
+    <TextView
+        android:id="@+id/pronto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="216dp"
+        android:text="TextView" />
 </RelativeLayout>
