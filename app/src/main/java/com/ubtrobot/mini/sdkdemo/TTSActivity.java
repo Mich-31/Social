@@ -75,7 +75,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     private AudioRecord audioRecord;
     private String audioFilePath;
     private boolean isRecording = false;
-    private double silenceThreshold = 2.0234091650872004E-8;
+    private double silenceThreshold = 2.0234091650872004E-4;
     private double energy;
     private int bufferSize = 0;
     private Thread recordingThread;
@@ -382,7 +382,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
     public void sendAudioFileToServer(String audioFilePath) {
         File audioFile = new File(audioFilePath);
-        String url = "http://10.0.2.2:8000/upload-audio";
+        String url = "http://172.20.10.6:8000/upload-audio";
 
         // Prepara il corpo della richiesta
         RequestBody requestBody = new MultipartBody.Builder()
