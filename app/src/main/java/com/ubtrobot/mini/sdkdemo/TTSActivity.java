@@ -68,10 +68,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     private boolean permissionToRecordAccepted = false;
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private String lastRecognizedText = "";
-    private TextView risultato;
-    private TextView pronto;
-
-    private TextView pronto2;
     private AudioRecord audioRecord;
     private String audioFilePath;
     private boolean isRecording = false;
@@ -214,9 +210,6 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tts);
-        risultato = findViewById(R.id.esito);
-        pronto = findViewById(R.id.pronto);
-        pronto2 = findViewById(R.id.pronto2);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -229,20 +222,38 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
-                // Called when the TTS starts speaking.
+                // Called when the TTS starts speaking
             }
 
             @Override
             public void onDone(String utteranceId) {
-                // Questo metodo viene chiamato quando TextToSpeech ha finito di parlare.
-                recognizeMicrophone();
+                Log.d(TAG, "TTS finished speaking. Attempting to restart speech recognition.");
+                runOnUiThread(() -> {
+                    if (speechService != null) {
+                        Log.d(TAG, "Stopping existing SpeechService before restarting.");
+                        speechService.stop();
+                        speechService = null;
+                    }
+                    recognizeMicrophone();
+                });
             }
 
             @Override
             public void onError(String utteranceId) {
             }
         });
+
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+        OfflineDialogClass.loadQuestionAnswer(this);
+    }
+
+    // In qualche punto del tuo codice, quando vuoi far parlare il TTS e poi continuare con il riconoscimento vocale:
+    public void speakAndListen(String text) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "UniqueID");
+
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+        // Non c'è bisogno di chiamare qui recognizeMicrophone(); verrà chiamato automaticamente quando TTS finisce di parlare.
     }
 
     @Override
@@ -271,12 +282,11 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
         StorageService.unpack(this, "model-it", "model",
                 (model) -> {
                     this.model = model;
-                    recognizeMicrophone();
-                    if(isDeviceConnectedToInternet()) {
-                        pronto.setText("Parla!");
-                    } else {
+                    textToSpeech.speak("Sono pronto!", TextToSpeech.QUEUE_FLUSH, null);
+                    while (textToSpeech.isSpeaking()) {
 
                     }
+                    recognizeMicrophone();
                 },
                 (exception) -> {
                     Log.e(TAG, "Failed to unpack the model: " + exception.getMessage());
@@ -286,16 +296,18 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
     private void recognizeMicrophone() {
         if (speechService != null) {
+            Log.d(TAG, "SpeechService is already initialized, stopping it.");
             speechService.stop();
             speechService = null;
-        } else {
-            try {
-                Recognizer rec = new Recognizer(model, 16000.0f);
-                speechService = new SpeechService(rec, 16000.0f);
-                speechService.startListening((RecognitionListener) this);
-            } catch (IOException e) {
-                Log.e(TAG, "Error initializing recognizer: " + e.getMessage());
-            }
+        }
+        try {
+            Log.d(TAG, "Initializing new SpeechService for recognition.");
+            Recognizer rec = new Recognizer(model, 16000.0f);
+            speechService = new SpeechService(rec, 16000.0f);
+            speechService.startListening(this);
+            Log.d("Riconoscimento Vocale", "SpeechService started listening.");
+        } catch (IOException e) {
+            Log.e(TAG, "Error initializing recognizer: " + e.getMessage(), e);
         }
     }
 
@@ -346,18 +358,21 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
             JSONObject jsonResult = new JSONObject(s);
             String textValue = jsonResult.optString("text", "").trim();
 
-            if (!textValue.equals(lastRecognizedText) && textValue.contains("ehi mario")){
+            Log.d("Riconoscimento Vocale", "Testo riconosciuto: " + textValue);
 
-                risultato.setText(textValue);
-                speechService.stop();
-                speechService = null;
-                // Crea un ToneGenerator passando il tipo di stream e il volume
-                ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-                // Suona il tono per 150 ms
-                toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
-                startRecording();
-
-                lastRecognizedText = textValue;
+            if (/*!textValue.equals(lastRecognizedText) && */ textValue.contains("ehi mario")){
+                if(isDeviceConnectedToInternet()) {
+                    speechService.stop();
+                    speechService = null;
+                    ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                    toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
+                    //lastRecognizedText = "";
+                    startRecording();
+                } else {
+                    String res = OfflineDialogClass.getResponse(textValue);
+                    textToSpeech.speak(res, TextToSpeech.QUEUE_FLUSH, null);
+                }
+                //lastRecognizedText = textValue;
             }
 
         } catch (JSONException e) {
@@ -382,7 +397,7 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
 
     public void sendAudioFileToServer(String audioFilePath) {
         File audioFile = new File(audioFilePath);
-        String url = "http://172.20.10.6:8000/upload-audio";
+        String url = "http://172.20.10.6:8000/upload-audio"; // Inserisci l'indirizzo IP del PC in cui è in esecuzione il server
 
         // Prepara il corpo della richiesta
         RequestBody requestBody = new MultipartBody.Builder()
@@ -419,9 +434,12 @@ public class TTSActivity extends AppCompatActivity implements RecognitionListene
                         JSONObject responseObj = jsonResponse.optJSONObject("risposta");
                         String output = responseObj != null ? responseObj.optString("output", "Nessuna risposta trovata.") : "Nessuna risposta trovata.";
 
-                        runOnUiThread(() -> {
-                            risultato.setText(output);
-                            textToSpeech.speak(output, TextToSpeech.QUEUE_FLUSH, null, "UniqueID");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                speakAndListen(output); // sostituisci "output" con la stringa che vuoi far leggere al TTS
+                                // recognizeMicrophone verrà riavviato nel onDone del UtteranceProgressListener
+                            }
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();

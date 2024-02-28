@@ -276,7 +276,7 @@ public class ImageCaptureActivity extends AppCompatActivity {
         DataOutputStream dos = null;
         FileInputStream fis = null;
         try {
-            URL url = new URL("http://10.0.2.2:8000/upload-image");
+            URL url = new URL("http://172.20.10.6:8000/upload-image");
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);

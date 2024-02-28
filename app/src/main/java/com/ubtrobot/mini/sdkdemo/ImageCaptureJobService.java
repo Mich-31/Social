@@ -33,6 +33,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -47,6 +50,15 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ImageCaptureJobService extends Service {
     private static final String TAG = "ImageCaptureJobService";
@@ -295,13 +307,71 @@ public class ImageCaptureJobService extends Service {
             output.write(bytes);
             Log.d(TAG, "Image saved to: " + imageFilePath);
 
-            new SendImageFileTask().execute(imageFilePath);
+            sendImageFileToServer(imageFilePath);
+            //new SendImageFileTask().execute(imageFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private class SendImageFileTask extends AsyncTask<String, Void, Void> {
+    public void sendImageFileToServer(String imagePath) {
+        File imageFile = new File(imagePath);
+        String url = "http://192.168.245.198:8000/upload-image"; // Inserisci l'indirizzo IP del PC in cui è in esecuzione il server
+
+        // Crea il corpo della richiesta
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("auth_id", "ALPHA-MINI-10F5-PRWE-U9YV-ADUQ")
+                .addFormDataPart("file", imageFile.getName(),
+                        RequestBody.create(MediaType.parse("image/jpg"), imageFile))
+                .build();
+
+        // Crea la richiesta
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        // Crea un client OkHttp e invia la richiesta
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                // Gestisci il fallimento qui, ad esempio mostrando un messaggio all'utente
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    // Gestisci la risposta non riuscita, ad esempio loggando l'errore
+                    Log.e("Upload Image", "Failed to upload image: " + response);
+                } else {
+                    // Gestisci la risposta del server qui
+                    String responseData = response.body().string();
+                    Log.d("Upload Image", "Image successfully uploaded: " + responseData);
+
+                    // Elimina l'immagine dal dispositivo
+                    boolean deleted = new File(imagePath).delete();
+                    if (deleted) {
+                        Log.d("Delete Image", "Image successfully deleted");
+                    } else {
+                        Log.e("Delete Image", "Failed to delete image");
+                    }
+
+                    // Puoi convertire la risposta in JSONObject se il server restituisce un JSON
+                    try {
+                        JSONObject jsonResponse = new JSONObject(responseData);
+                        // Agire in base alla risposta del server
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    /*private class SendImageFileTask extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             String filePath = params[0];
@@ -325,7 +395,7 @@ public class ImageCaptureJobService extends Service {
             String twoHyphens = "--";
             String boundary = "*****";
 
-            URL url = new URL("https://alpha-mini.azurewebsites.net/upload-image"); // Sostituisci con l'URL del tuo server
+            URL url = new URL("http://172.20.10.6:8000/upload-image"); // Sostituisci con l'URL del tuo server
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);
@@ -377,6 +447,7 @@ public class ImageCaptureJobService extends Service {
                     response.append(inputLine);
                 }
                 in.close();
+                new File(imagePath).delete(); // Cancella il file dopo l'invio
 
                 // Converti la risposta in oggetto AgentResponse
                 return new Gson().fromJson(response.toString(), AgentResponse.class);
@@ -446,6 +517,6 @@ public class ImageCaptureJobService extends Service {
         public void setAnswer(String answer) {
             this.answer = answer;
         }
-    }
+    }*/
 
 }

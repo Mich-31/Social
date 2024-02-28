@@ -1,0 +1,56 @@
+{
+  "questions": [
+    {
+      "question": "Come stai?",
+      "answer": "Sto bene, grazie."
+    },
+    {
+      "question": "Qual è il tuo nome?",
+      "answer": "Il mio nome è [Nome]."
+    },
+    {
+      "question": "Di dove sei?",
+      "answer": "Sono di [Luogo]."
+    },
+    {
+      "question": "Cosa fai?",
+      "answer": "Sono [Lavoro/Studente]."
+    },
+    {
+      "question": "Quanti anni hai?",
+      "answer": "Ho [Età] anni."
+    },
+    {
+      "question": "Qual è il tuo colore preferito?",
+      "answer": "Il mio colore preferito è il blu."
+    },
+    {
+      "question": "Qual è il tuo cibo preferito?",
+      "answer": "Amo la pizza!"
+    },
+    {
+      "question": "Cosa ti piace fare nel tempo libero?",
+      "answer": "Mi piace leggere e fare escursioni."
+    },
+    {
+      "question": "Qual è il tuo film preferito?",
+      "answer": "Il mio film preferito è Le ali della libertà."
+    },
+    {
+      "question": "Qual è il tuo hobby preferito?",
+      "answer": "Mi piace [Hobby]."
+    },
+    {
+      "question": "Qual è la tua stagione preferita?",
+      "answer": "Amo [Stagione] perché [Motivo]."
+    },
+    {
+      "question": "Qual è il tuo genere musicale preferito?",
+      "answer": "Mi piace ascoltare [Genere musicale]."
+    },
+    {
+      "question": "Hai fratelli o sorelle?",
+      "answer": "Sì, ho [Numero di fratelli/sorelle] fratelli/sorelle."
+    }
+  ]
+}
