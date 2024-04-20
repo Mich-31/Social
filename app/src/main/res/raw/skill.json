@@ -1,0 +1,132 @@
+{
+  "actions": [
+    {
+      "key": "inizia esercizio",
+      "action": "exercise"
+    },
+    {
+      "key": "inizia yoga",
+      "action": "yoga"
+    },
+    {
+      "key": "inizia kungfu",
+      "action": "kungfu"
+    },
+    {
+      "key": "siediti",
+      "action": "sit_down"
+    },
+    {
+      "key": "vola",
+      "action": "fly"
+    },
+    {
+      "key": "alzati",
+      "action": "stand_up"
+    },
+    {
+      "key": "alza le mani",
+      "action": "raisinghands"
+    },
+    {
+      "key": "alza la gamba destra",
+      "action": "raisingrightleg"
+    },
+    {
+      "key": "alza la gamba sinistra",
+      "action": "raisingleftleg"
+    },
+    {
+      "key": "abbassati",
+      "action": "stoop"
+    },
+    {
+      "key": "continua a girare a destra",
+      "action": "Keep_turning_right"
+    },
+    {
+      "key": "continua a girare a sinistra",
+      "action": "Keep_turning_left"
+    },
+    {
+      "key": "continua a muoverti in avanti",
+      "action": "Keep_moving_forward"
+    },
+    {
+      "key": "continua a muoverti indietro",
+      "action": "Keep_going_backwards"
+    },
+    {
+      "key": "accovacciati",
+      "action": "crouch"
+    },
+    {
+      "key": "inchino",
+      "action": "bow_step"
+    },
+    {
+      "key": "saluta",
+      "action": "say_hi"
+    },
+    {
+      "key": "starnutisci",
+      "action": "sneeze"
+    },
+    {
+      "key": "rutto",
+      "action": "burp"
+    },
+    {
+      "key": "fai un peto",
+      "action": "break_wind"
+    },
+    {
+      "key": "graffia",
+      "action": "scratch"
+    },
+    {
+      "key": "bacio alla mano",
+      "action": "hand_kiss"
+    },
+    {
+      "key": "abbraccio",
+      "action": "hug"
+    },
+    {
+      "key": "allunga",
+      "action": "Stretch"
+    },
+    {
+      "key": "sonnecchia",
+      "action": "doze"
+    },
+    {
+      "key": "impaurisci",
+      "action": "frighten"
+    },
+    {
+      "key": "stretta di mano",
+      "action": "shake_hand"
+    },
+    {
+      "key": "fai un cenno",
+      "action": "nod"
+    },
+    {
+      "key": "scuoti la testa",
+      "action": "shake_head"
+    },
+    {
+      "key": "gira la testa",
+      "action": "turn_head"
+    },
+    {
+      "key": "sii carino",
+      "action": "be_cute"
+    },
+    {
+      "key": "danza",
+      "action": "dancing"
+    }
+  ]
+}

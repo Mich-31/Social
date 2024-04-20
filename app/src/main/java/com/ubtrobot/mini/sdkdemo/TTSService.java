@@ -28,9 +28,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.ubtechinc.skill.SkillHelper;
+import com.ubtrobot.transport.message.CallException;
+import com.ubtrobot.transport.message.ResponseCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +58,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -80,7 +85,6 @@ public class TTSService extends Service implements RecognitionListener {
     private double silenceThreshold = 2.0234091650872004E-4;
     private double energy;
     private int bufferSize = 0;
-    private Thread recordingThread;
     private ByteArrayOutputStream audioDataBuffer = new ByteArrayOutputStream();
     private boolean first = true;
     private boolean isSpeaking = false;
@@ -151,7 +155,7 @@ public class TTSService extends Service implements RecognitionListener {
                     Log.e("AudioRecorder", "Failed to save recording", e);
                 }
             }
-            recordingThread = null;
+            Thread recordingThread = null;
         }
     }
 
@@ -219,6 +223,8 @@ public class TTSService extends Service implements RecognitionListener {
         super.onCreate();
 
         startForeground(1, createNotification());
+
+        Toast.makeText(this, "TTS Service", Toast.LENGTH_SHORT);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -387,26 +393,52 @@ public class TTSService extends Service implements RecognitionListener {
 
     }
 
+    @NonNull private ResponseCallback getListener() {
+        return new ResponseCallback() {
+            @Override public void onResponse(com.ubtrobot.transport.message.Request request, com.ubtrobot.transport.message.Response response) {
+                Log.i(TAG, "start success.");
+            }
+
+            @Override public void onFailure(com.ubtrobot.transport.message.Request request, CallException e) {
+                Log.i(TAG, e.getMessage());
+            }
+        };
+    }
+
+    public void dancing() {
+        SkillHelper.startSkillByIntent("dancing", null, getListener());
+    }
+
     @Override
     public void onResult(String s) {
+        ActivityReader.readActivitiesFromFile(this);
+
         try {
             JSONObject jsonResult = new JSONObject(s);
             String textValue = jsonResult.optString("text", "").trim();
 
             Log.d("Riconoscimento Vocale", "Testo riconosciuto: " + textValue);
 
-            if (textValue.contains("ehi mario")){
-                if(isDeviceConnectedToInternet()) {
-                    speechService.stop();
-                    speechService = null;
-                    ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-                    toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
-                    //lastRecognizedText = "";
-                    startRecording();
+            if (textValue.contains("ehi mario")) {
+
+                String action = ActivityReader.getAction(textValue);
+
+                if(action.compareTo("") != 0) {
+                    SkillHelper.startSkillByIntent(action, null, getListener());
+                    Log.d("fjdskgdfgfd", "fgsddfgfdgfgfdgfdgdfgfdfsd");
                 } else {
-                    if(!textValue.equals("ehi mario")) {
-                        String res = OfflineDialogClass.getResponse(textValue);
-                        textToSpeech.speak(res, TextToSpeech.QUEUE_FLUSH, null);
+                    if (isDeviceConnectedToInternet()) {
+                        speechService.stop();
+                        speechService = null;
+                        ToneGenerator toneGen = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                        toneGen.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 150);
+                        //lastRecognizedText = "";
+                        startRecording();
+                    } else {
+                        if (!textValue.equals("ehi mario")) {
+                            String res = OfflineDialogClass.getResponse(textValue);
+                            textToSpeech.speak(res, TextToSpeech.QUEUE_FLUSH, null);
+                        }
                     }
                 }
                 lastRecognizedText = textValue;

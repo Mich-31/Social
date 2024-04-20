@@ -196,6 +196,10 @@
         "source": "/home/mich/Scrivania/Social/app/src/main/res/layout/behavior_activity.xml"
     },
     {
+        "merged": "/home/mich/Scrivania/Social/app/build/intermediates/res/merged/debug/raw_questions.json.flat",
+        "source": "/home/mich/Scrivania/Social/app/src/main/res/raw/questions.json"
+    },
+    {
         "merged": "/home/mich/Scrivania/Social/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/home/mich/.gradle/caches/transforms-2/files-2.1/2944bcb9086afdce2a6d24c12d0e0db7/res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -1450,6 +1454,10 @@
     {
         "merged": "/home/mich/Scrivania/Social/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/home/mich/.gradle/caches/transforms-2/files-2.1/8b27bdfef7cafca102441f835c0b64f4/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/home/mich/Scrivania/Social/app/build/intermediates/res/merged/debug/raw_skill.json.flat",
+        "source": "/home/mich/Scrivania/Social/app/src/main/res/raw/skill.json"
     },
     {
         "merged": "/home/mich/Scrivania/Social/app/build/intermediates/res/merged/debug/layout-v21_notification_action.xml.flat",

@@ -695,7 +695,6 @@ id default_activity_button
 id disableHome
 id edit_query
 id end
-id esito
 id expand_activities_button
 id expanded_menu
 id fill
@@ -734,7 +733,6 @@ id pause
 id playring
 id progress_circular
 id progress_horizontal
-id pronto
 id radio
 id recognize_mic
 id result_text
@@ -872,6 +870,8 @@ layout take_pic_api_layout
 layout vosk
 mipmap ic_launcher
 mipmap ic_launcher_round
+raw questions
+raw skill
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

@@ -12,6 +12,6 @@ public final class R {
     public static final class xml {
         private xml() {}
 
-        public static final int service_contact = 0x7f0e0009;
+        public static final int service_contact = 0x7f0f0009;
     }
 }
